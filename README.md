@@ -305,15 +305,6 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ---
 
-## 📞 Support
-
-For support, please contact:
-- 📧 Email: support@satyamportal.gov.in
-- 🐛 Issues: [GitHub Issues](https://github.com/your-org/satyam-portal/issues)
-- 📖 Documentation: [Wiki](https://github.com/your-org/satyam-portal/wiki)
-
----
-
 <div align="center">
 
 **Built with ❤️ for transparent and accountable government procurement**
