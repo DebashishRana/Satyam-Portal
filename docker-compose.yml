@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  # Backend API
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: satyam-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/satyam
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=your-super-secret-key-change-in-production
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./backend/uploads:/app/uploads
+    depends_on:
+      - db
+      - redis
+    networks:
+      - satyam-network
+    restart: unless-stopped
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: satyam-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - api
+    networks:
+      - satyam-network
+    restart: unless-stopped
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: satyam-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=satyam
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - satyam-network
+    restart: unless-stopped
+
+  # Redis Cache/Queue
+  redis:
+    image: redis:7-alpine
+    container_name: satyam-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - satyam-network
+    restart: unless-stopped
+
+  # Nginx Reverse Proxy (optional, for production)
+  nginx:
+    image: nginx:alpine
+    container_name: satyam-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - api
+      - frontend
+    networks:
+      - satyam-network
+    restart: unless-stopped
+    profiles:
+      - production
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  satyam-network:
+    driver: bridge
