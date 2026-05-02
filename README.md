@@ -307,7 +307,7 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 <div align="center">
 
-**Built with ❤️ for transparent and accountable government procurement**
+**Built with ❤️ for transparent and accountable government procurement and sheer dedication for a better tommorow**
 
 [⬆ Back to Top](#-satyam-portal)
 
