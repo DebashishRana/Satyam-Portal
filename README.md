@@ -74,8 +74,6 @@ CRPF tender evaluation is manual, document-heavy, and unstructured. Evaluators p
 
 ---
 
-![alt text](problems.png)
-
 ## 💡 SOLUTION SUMMARY ~
 
 An AI-powered tender evaluation co-pilot that transforms complex tender and bidder documents into structured, clause-level eligibility decisions with full auditability. It combines OCR, NLP, and rule-based logic to automate evaluation, ensure consistency, and keep humans in control of ambiguous cases.
@@ -89,13 +87,7 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
 - Reusable bidder profiles across tenders. 
 - API-based integration with existing systems.  
 ---
-![alt text](<Screenshot 2026-05-04 211526.png>)
-
-
----
-
 ## 🏗️ ARCHITECTURE ~
-
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    SATYAM PORTAL ARCHITECTURE                     │
@@ -226,7 +218,7 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
 
 ---
 
-### 🏆 WHY THIS WINS  (COMPETETIVE EDGE) ~
+### 🏆 COMPETETIVE EDGE  ~
 
 - 🟢 **Defensible Decisions (Vigilance-Ready)**  
   Empowers officers with explainable outputs for audits (CBI/CVC/CAG).
@@ -239,40 +231,59 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
 
 - 🟢 **Market-Ready Solution**  
   Positioned for India’s ECM market projected at **$4.9B by 2032**.
-  
+
   ---
-  ## 🚀 Roadmap & Future Enhancements
+##  FUTURE ENHANCEMENTS ~ 
 
-### 🟢 Phase 1: Foundation (0–3 Months)
-- Core OCR + document parsing (PDFs, scans, images)
-- Deterministic criteria engine (PASS / FAIL / REVIEW)
-- Explainable, audit-ready reports
-- Human-in-the-loop (HITL) validation system
-
----
-
-### 🟢 Phase 2: Intelligence & Scale (3–6 Months)
-- Multi-source API integration (GST, PAN, govt DBs)
-- Reusable bidder profiles (Trust & Reuse layer)
-- Dynamic corrigendum re-evaluation
-- Performance optimization for high-volume processing
+![Roadmap](https://img.shields.io/badge/roadmap-advanced-blue)
+![AI](https://img.shields.io/badge/AI-intelligence-purple)
+![Scale](https://img.shields.io/badge/scalable-national_level-orange)
+![Impact](https://img.shields.io/badge/impact-high-success)
 
 ---
 
-### 🟢 Phase 3: Advanced AI & Risk Insights (6–12 Months)
-- Predictive Vendor Risk Scoring (reliability index)
-- Federated learning across departments (CRPF, BSF, ITBP)
-- Improved multilingual & handwritten document parsing (Bhashini integration)
+### 🟢 High-Impact Enhancements
+
+- 🟢 **Gov API Integration**  
+  DigiLocker, GSTN, MCA, GeM → eliminates repeated verification  
+
+- 🟢 **Persistent Trust Graph**  
+  One-time verified credentials reused across tenders  
+
+- 🟢 **Clause Contradiction Detection**  
+  Detects conflicting, duplicate, or restrictive tender rules  
+
+- 🟢 **Multilingual Support**  
+  Handles Indic + mixed-language procurement documents  
+
+- 🟢 **Historical Intelligence Layer**  
+  Semantic insights from past tenders & bidder outcomes  
+
+- 🟢 **Risk & Integrity Analytics**  
+  Detects favoritism, anomalies, and manipulation patterns  
+
+- 🟢 **Near Real-Time Processing**  
+  Moves from batch → faster, continuous evaluation  
+
+- 🟢 **Auto-Generated Reasoned Orders**  
+  Produces audit-ready reports, annexures, and summaries  
 
 ---
 
-### 🟢 Phase 4: Trust Infrastructure & Automation (12+ Months)
-- Zero-Knowledge Proofs (ZKP) for privacy-preserving verification
-- Blockchain-based smart contracts
-- e-Rupee integration for automated milestone payments
-- Fully interoperable national procurement ecosystem
+### 🧠 Strategic Direction
 
----
+- 🟢 **Cross-Department Scalability**  
+  Extendable to ministries, PSUs, and state systems  
+
+- 🟢 **Policy Intelligence Engine**  
+  Identifies systemic issues → improves tender design  
+
+- 🟢 **Bidder Readiness Assistant**  
+  Pre-validates submissions → reduces rejection errors  
+
+- 🟢 **Procurement Benchmark Dashboard**  
+  Tracks cycle time, rejection rates, and audit readiness
+  ---  
 ## 🚀 How To Run Locally ~
 
 ### Prerequisites
