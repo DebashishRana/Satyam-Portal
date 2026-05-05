@@ -38,25 +38,16 @@
 ---
 ## 📑 Table of Contents ~
 
-- [1. Problem Statement .](#1-problem-statement.)
-
-- [2. Solution Summary .](#2-solution-summary.)
-
-- [3. Core Architecture & Implementation .](#3-core-architecture--implementation.)
-
-- [4. Key differentiatores .](#4-key-differentiators.)
-
-- [5. Key Metrics & Impacts .](#5-key-metrics--impacts.)
-
-- [6. Future Enhancements .](#6-future-enhancements)
-
-- [7. How to Run Locally .](#7-how-to-run-locally.)
-
-- [8. Documentation & Deployment Procedures .](#8-documentation--deployment-procedures.)
-
-- [9. Environment Variables, Security & Testing .](#9-environment-variables-security--testing.)
-
-- [10. License, Usage & Contact .](#10-license-usage--contact.)
+- [1. Problem Statement](#1-problem-statement)
+- [2. Solution Summary](#2-solution-summary)
+- [3. Core Architecture & Implementation](#3-core-architecture--implementation)
+- [4. Key Differentiators](#4-key-differentiators)
+- [5. Key Metrics & Impacts](#5-key-metrics--impacts)
+- [6. Future Enhancements](#6-future-enhancements)
+- [7. How to Run Locally](#7-how-to-run-locally)
+- [8. Documentation & Deployment Procedures](#8-documentation--deployment-procedures)
+- [9. Environment Variables, Security & Testing](#9-environment-variables-security--testing)
+- [10. License, Usage & Contact](#10-license-usage--contact)
 
 ## PROBLEM STATEMENT  ~
 
