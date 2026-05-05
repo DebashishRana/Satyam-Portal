@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="<img width="1402" height="765" alt="satyam img" src="https://github.com/user-attachments/assets/f6e3abe2-45dd-41d2-abf3-5072e4a55621" />
-" />
+  <img src="<img width="1402" height="765" alt="satyam img"/>
+
    
 </div>
 <hr>
