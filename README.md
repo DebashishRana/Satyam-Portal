@@ -58,7 +58,7 @@
 
 - [10. License, Usage & Contact .](#10-license-usage--contact.)
 
-## ⚖️ PROBLEM STATEMENT  ~
+## PROBLEM STATEMENT  ~
 
 📌 PROBLEM UNDERSTANDING ~ 
 
@@ -87,7 +87,7 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
 - Reusable bidder profiles across tenders. 
 - API-based integration with existing systems.  
 ---
-## 🏗️ ARCHITECTURE ~
+##  ⚙️ ARCHITECTURE ~
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    SATYAM PORTAL ARCHITECTURE                     │
@@ -138,7 +138,7 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#  Technology Stack ~
+# ⚙️ Technology Stack ~
 
 | Layer | Technology |
 |-------|-----------|
@@ -152,37 +152,37 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
 ---
 ## ✨ KEY DIFFERENTIATORS ~
 
-### 🔍 Tender Insight Engine (TIE) ~
+### 🟢 Tender Insight Engine (TIE) ~
 - **Document Understanding**: Multi-page tender PDF processing with LayoutLMv3
 - **Criteria Extraction**: Automatic extraction of Condition-Threshold-Penalty triplets
 - **Risk Detection**: Flags contradictory clauses and ambiguous requirements
 
-### 📝 Bidder Evidence Miner (BEM) ~
+### 🟢 Bidder Evidence Miner (BEM) ~
 - **OCR Ensemble**: Bhashini/AI4Bharat for Indic scripts + high-accuracy Latin OCR
 - **Table Extraction**: Financial data extraction from balance sheets
 - **Entity Recognition**: GSTIN, PAN, CIN, dates, amounts validation
 - **Document Authentication**: QR code, stamp, and signature detection
 
-### ⚖️ Deterministic Evaluation Engine ~
+### 🟢 Deterministic Evaluation Engine ~
 - **Rule-Based Matching**: 100% auditable, explainable decision logic (PyRete-style)
 - **Human-in-the-Loop**: No-silent-rejection policy - all ambiguous cases routed to human review
 - **Verification Cards**: Per-criterion evidence with file, page, and bounding box citations
 - **Audit Trail**: Every decision logged with who/when/why for CAG compliance
 
-### 🎯 Officer Portal Features ~
+### 🟢 Officer Portal Features ~
 - **Tender Summary**: AI-extracted eligibility schema grouped by category
 - **Bidders Comparison**: Matrix view of all bidders vs criteria (Pass/Fail/Review)
 - **One-Click Reports**: Draft Reasoned Order and Evaluation Report generation
 - **Conflict Flags**: Automatic detection of insider-risk patterns .
 
-### 👤 Bidder Portal Features ~
+### 🟢 Bidder Portal Features ~
 - **Pizza-Tracker Status**: Visual progress through evaluation stages
 - **Guided Uploads**: Checklist-based document submission with format validation
 - **Clarification Tickets**: No silent rejections - transparent communication
 - **Outcome Transparency**: Per-criterion explanations with evidence links .
 
 ---
-## ⚙️ KEY METRICES & IMPACTS ~
+## 📈 KEY METRICES & IMPACTS ~
 
 ### 🟢 Core System Features
 
@@ -233,7 +233,7 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
   Positioned for India’s ECM market projected at **$4.9B by 2032**.
 
   ---
-##  FUTURE ENHANCEMENTS ~ 
+## 📈 FUTURE ENHANCEMENTS ~ 
 
 ![Roadmap](https://img.shields.io/badge/roadmap-advanced-blue)
 ![AI](https://img.shields.io/badge/AI-intelligence-purple)
@@ -242,7 +242,7 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
 
 ---
 
-### 🟢 High-Impact Enhancements
+### 🟢 High-Impact Enhancements ~
 
 - 🟢 **Gov API Integration**  
   DigiLocker, GSTN, MCA, GeM → eliminates repeated verification  
@@ -270,7 +270,7 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
 
 ---
 
-### 🧠 Strategic Direction
+### ⚙️ Strategic Direction ~
 
 - 🟢 **Cross-Department Scalability**  
   Extendable to ministries, PSUs, and state systems  
@@ -284,14 +284,14 @@ An AI-powered tender evaluation co-pilot that transforms complex tender and bidd
 - 🟢 **Procurement Benchmark Dashboard**  
   Tracks cycle time, rejection rates, and audit readiness
   ---  
-## 🚀 How To Run Locally ~
+## 🔄 How To Run Locally ~
 
 ### Prerequisites
 - Docker 20.10+ and Docker Compose
 - Node.js 20+ (for local frontend development)
 - Python 3.11+ (for local backend development)
 
-### Option 1: Docker Compose (Recommended)
+### Option 1: Docker Compose (Recommended) ~
 
 ```bash
 # Clone the repository
@@ -307,9 +307,9 @@ docker-compose up -d
 # Backend API: http://localhost:8000
 ```
 
-### Option 2: Local Development
+### Option 2: Local Development ~
 
-#### Backend Setup
+#### Backend Setup ~
 ```bash
 cd backend
 
@@ -324,7 +324,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-#### Frontend Setup
+#### Frontend Setup ~
 ```bash
 cd frontend
 
@@ -337,7 +337,9 @@ npm start
 # Access at http://localhost:3000
 ```
 
-### Demo Credentials
+### Demo Credentials ~
+---
+
 | Role | Email | Password |
 |------|-------|----------|
 | Officer | `officer1@crpf.gov.in` | `password123` |
@@ -345,14 +347,14 @@ npm start
 
 ---
 
-## 📚 Documentation
+## 📚 Documentation ~
 
-### API Documentation
+### API Documentation ~
 Once the server is running, access interactive API documentation:
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 
-### Key API Endpoints
+### Key API Endpoints ~
 
 | Endpoint | Description |
 |----------|-------------|
@@ -364,7 +366,7 @@ Once the server is running, access interactive API documentation:
 | `POST /api/v1/evaluation/{tender_id}/evaluate/{bidder_id}` | Run evaluation |
 
 
-### Project Structure
+### Project Structure ~
 ```
 satyam-portal/
 ├── backend/
@@ -389,7 +391,7 @@ satyam-portal/
 ```
 
 ---
-## 🛠️ Deployment Strategy (Government-Ready) ~
+## ⚙️ Deployment Strategy (Government-Ready) ~
 
 ### 🟢 1. Infrastructure (Sovereign Cloud)
 - Deploy on **MeitY-approved GCC / On-Prem / Air-Gapped** environment  
@@ -421,7 +423,7 @@ satyam-portal/
 ---
 ## ⚙️ Environment Variables (Secure, Scalable & Government-Ready) ~
 
-> 🔐 All sensitive variables are managed via **centralized secret management** using  
+>  All sensitive variables are managed via **centralized secret management** using  
 > [HashiCorp Vault](https://www.vaultproject.io/) + [Cloud KMS](https://cloud.google.com/kms) + [Hardware Security Modules (HSM)](https://en.wikipedia.org/wiki/Hardware_security_module),  
 > with enforced **RBAC**, **automatic key rotation**, and **immutable audit logging**.
 
@@ -450,18 +452,18 @@ satyam-portal/
 
 ---
 
-## 🛡️ Security & Reliability Guarantees
+## 🛡️ Security & Reliability Guarantees ~
 
-- 🔐 **Centralized secret management** (Vault + KMS + HSM)
-- 🔄 **Automatic key rotation & lifecycle management**
-- 🧩 **Zero-trust architecture** (RBAC + service identity)
-- 📦 **High availability** (DB replication + Redis clustering)
-- 🕵️ **PII masking & secure logging**
-- 📜 **Immutable audit trail (WORM compliant)**
-- ⚡ **Resilient APIs** with retry, timeout & fallback mechanisms
+-  **Centralized secret management** (Vault + KMS + HSM)
+-  **Automatic key rotation & lifecycle management**
+-  **Zero-trust architecture** (RBAC + service identity)
+-  **High availability** (DB replication + Redis clustering)
+-  **PII masking & secure logging**
+-  **Immutable audit trail (WORM compliant)**
+-  **Resilient APIs** with retry, timeout & fallback mechanisms
 ---
 
-## 🔐 Security & Reliability Enhancements
+## 🔐 Security & Reliability Enhancements ~
 
 - Centralized **Vault + KMS + HSM integration**
 - Automatic **key rotation & versioning**
@@ -470,15 +472,19 @@ satyam-portal/
 - **PII-safe logging & masking**
 - **Immutable audit logs (WORM compliant)**
 - **API retry + timeout + fallback mechanisms**
+  
+  ---
+  
+  
 ## 🔐 Security & Compliance ~
 
-### Data Protection
+### Data Protection ~
 - **Encryption**: TLS 1.3 everywhere, AES-256 at rest
 - **Access Control**: RBAC with fine-grained permissions
 - **Audit Logging**: Full audit trail for all data access
 - **Data Residency**: Deployable on MeghRaj/GCC for data sovereignty
 
-### Government Compliance
+### Government Compliance ~
 - **GFR 2017**: Compliant with General Financial Rules
 - **CVC Guidelines**: Vigilance and integrity measures
 - **CAG Audit**: Audit-ready documentation structure
@@ -486,28 +492,28 @@ satyam-portal/
 
 ---
 
-## 🧪 Testing
+##  Testing ~
 
-### Backend Tests
+### Backend Tests ~
 ```bash
 cd backend
 pytest
 ```
 
-### Frontend Tests
+### Frontend Tests ~
 ```bash
 cd frontend
 npm test
 ```
 
-### Integration Tests
+### Integration Tests ~
 ```bash
 docker-compose -f docker-compose.test.yml up --abort-on-container-exit
 ```
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contributing ~
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
@@ -519,13 +525,13 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ---
 
-## 📄 License
+## 📄 License ~
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## 🙏 Acknowledgments ~
 
 - **CRPF/MHA** for the problem statement and domain expertise
 - **Bhashini/AI4Bharat** for Indic language OCR support
@@ -536,7 +542,23 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 <div align="center">
 
 **Built with ❤️ for transparent and accountable government procurement and sheer dedication for a better tommorow**
+---
+## 📞 Contact Us
 
+- 👤 **Dev**  
+  🔗 [LinkedIn](https://linkedin.com/in/devarana)  
+  📧 [Email](mailto:dimareznokov@gmail.com)
+
+- 👤 **Pushkar Kumar**  
+  🔗 [LinkedIn](https://linkedin.com/in/pushkar-kumar-225b41407)  
+  📧 [Email](mailto:pushkarkr.6699@gmail.com)
+
+- 👤 **Idhant Raj**  
+  🔗 [LinkedIn](https://linkedin.com/in/idhant-raj-ba8722386)  
+  📧 [Email](mailto:idhantraj@gmail.com)
+  
+  ---
+  
 [⬆ Back to Top](#-satyam-portal)
 
 </div>
