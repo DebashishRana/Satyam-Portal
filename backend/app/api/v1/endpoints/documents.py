@@ -6,6 +6,7 @@ from fastapi import APIRouter, UploadFile, File, Depends, HTTPException, status
 from fastapi.security import HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Optional
+import asyncio
 import uuid
 import shutil
 import os
@@ -136,7 +137,7 @@ async def process_document(
     
     try:
         # OCR processing
-        ocr_result = await ocr_service.process_document(document["file_path"])
+        ocr_result = await asyncio.to_thread(ocr_service.process_document, document["file_path"])
         document["ocr_result"] = ocr_result
         
         # Data extraction

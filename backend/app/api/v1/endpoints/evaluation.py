@@ -14,12 +14,37 @@ from app.schemas.evaluation import (
     VerificationCard, EvaluationReport, BidderEvaluation
 )
 from app.services.evaluation_engine import EvaluationEngine
+from app.services.notifications import notification_service
+from app.schemas.bidder import SubmissionStatus
+from app.api.v1.endpoints.tenders import TENDERS_DB
 
 router = APIRouter()
 security = HTTPBearer()
 
 # Mock evaluation database
 EVALUATIONS_DB = {}
+
+
+def _find_submission_for_evaluation(tender_id: str, bidder_id: str):
+    from app.api.v1.endpoints.bidders import SUBMISSIONS_DB
+
+    return next(
+        (
+            submission
+            for submission in SUBMISSIONS_DB.values()
+            if submission.get("tender_id") == tender_id and submission.get("bidder_id") == bidder_id
+        ),
+        None,
+    )
+
+
+def _tender_for_notification(tender_id: str):
+    return TENDERS_DB.get(tender_id) or {
+        "id": tender_id,
+        "title": f"Tender {tender_id}",
+        "reference_number": tender_id,
+        "contact_email": "tender-officer@crpf.gov.in",
+    }
 
 @router.post("/{tender_id}/evaluate/{bidder_id}", response_model=EvaluationResult)
 async def evaluate_bidder(
@@ -36,6 +61,22 @@ async def evaluate_bidder(
         )
     
     evaluation_id = str(uuid.uuid4())
+    submission = _find_submission_for_evaluation(tender_id, bidder_id)
+    tender = _tender_for_notification(tender_id)
+
+    if submission:
+        previous_status = submission.get("status")
+        submission["status"] = SubmissionStatus.UNDER_TECHNICAL_REVIEW
+        submission["current_stage"] = "Under Technical Review"
+        submission["last_updated"] = datetime.utcnow().isoformat()
+        await notification_service.notify_status_change(
+            submission=submission,
+            status=SubmissionStatus.UNDER_TECHNICAL_REVIEW,
+            tender=tender,
+            previous_status=previous_status,
+            event_type="evaluation_started",
+            officer_contact=tender.get("contact_email"),
+        )
     
     # Initialize evaluation engine
     engine = EvaluationEngine()
@@ -58,6 +99,32 @@ async def evaluate_bidder(
     }
     
     EVALUATIONS_DB[evaluation_id] = evaluation
+
+    if submission:
+        previous_status = submission.get("status")
+        if result["all_passed"]:
+            next_status = SubmissionStatus.TECHNICALLY_QUALIFIED
+            reason = "All technical criteria passed automated rule evaluation."
+        elif any(item["status"] == "FAIL" for item in result["criterion_results"]):
+            next_status = SubmissionStatus.TECHNICALLY_NOT_QUALIFIED
+            reason = "One or more mandatory technical criteria did not pass evaluation."
+        else:
+            next_status = SubmissionStatus.CLARIFICATION_REQUESTED
+            reason = "One or more criteria require clarification or manual review."
+
+        submission["status"] = next_status
+        submission["current_stage"] = next_status.value.replace("_", " ").title()
+        submission["last_updated"] = datetime.utcnow().isoformat()
+        await notification_service.notify_status_change(
+            submission=submission,
+            status=next_status,
+            tender=tender,
+            previous_status=previous_status,
+            reason=reason,
+            required_action="Review the portal and respond to any clarification requested by the evaluation team.",
+            event_type="evaluation_result",
+            officer_contact=tender.get("contact_email"),
+        )
     
     return EvaluationResult(
         evaluation_id=evaluation_id,
@@ -197,6 +264,20 @@ async def override_criterion_status(
         evaluation["overall_result"] = "REVIEW"
     else:
         evaluation["overall_result"] = "PASS"
+
+    submission = _find_submission_for_evaluation(evaluation["tender_id"], evaluation["bidder_id"])
+    if submission:
+        tender = _tender_for_notification(evaluation["tender_id"])
+        await notification_service.notify_status_change(
+            submission=submission,
+            status="manual_override",
+            tender=tender,
+            previous_status=submission.get("status"),
+            reason=comment,
+            event_type="manual_override",
+            criterion_id=criterion_id,
+            officer_contact=tender.get("contact_email"),
+        )
     
     return {
         "message": "Criterion status overridden successfully",

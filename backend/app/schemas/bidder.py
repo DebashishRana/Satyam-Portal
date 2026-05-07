@@ -36,10 +36,16 @@ class BidderResponse(BaseModel):
 class SubmissionStatus(str, Enum):
     SUBMITTED = "submitted"
     UNDER_SCRUTINY = "under_scrutiny"
+    UNDER_TECHNICAL_REVIEW = "under_technical_review"
     TECHNICAL_EVALUATION = "technical_evaluation"
+    TECHNICALLY_QUALIFIED = "technically_qualified"
+    TECHNICALLY_NOT_QUALIFIED = "technically_not_qualified"
+    UNDER_FINANCIAL_REVIEW = "under_financial_review"
     FINANCIAL_EVALUATION = "financial_evaluation"
     ACCEPTED = "accepted"
     REJECTED = "rejected"
+    AWARDED = "awarded"
+    NOT_AWARDED = "not_awarded"
     CLARIFICATION_REQUESTED = "clarification_requested"
 
 class BidSubmission(BaseModel):
@@ -87,3 +93,9 @@ class ClarificationRequest(BaseModel):
     status: str
     response: Optional[str] = None
     response_documents: Optional[List[str]] = None
+
+class SubmissionStatusUpdate(BaseModel):
+    status: SubmissionStatus
+    reason: Optional[str] = None
+    required_action: Optional[str] = None
+    officer_contact: Optional[str] = None

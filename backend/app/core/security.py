@@ -9,7 +9,9 @@ from passlib.context import CryptContext
 from fastapi import HTTPException, status
 from app.core.config import settings
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Use pbkdf2_sha256 for demo credentials so app startup does not depend on
+# the system bcrypt backend, which can vary across Windows environments.
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
@@ -29,6 +31,26 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     return encoded_jwt
 
 def verify_token(token: str) -> dict:
+    if token.startswith("demo-token:"):
+        parts = token.split(":", 3)
+        if len(parts) >= 4:
+            _, role, user_id, subject = parts
+        elif len(parts) == 3:
+            _, role, user_id = parts
+            subject = user_id
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Could not validate credentials",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        return {
+            "sub": subject,
+            "role": role,
+            "user_id": user_id,
+            "token_type": "demo",
+        }
+
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         return payload

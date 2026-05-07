@@ -6,6 +6,8 @@ import logging
 from typing import Optional
 import asyncio
 
+from app.services.bidder_pipeline import pipeline_service
+
 logger = logging.getLogger(__name__)
 
 class TaskQueue:
@@ -53,14 +55,36 @@ class TaskQueue:
         """Process a single task."""
         task_type = task.get("type")
         
-        if task_type == "ocr":
+        if task_type == "document_uploaded":
+            await self._process_document_uploaded_task(task)
+        elif task_type == "ocr":
             await self._process_ocr_task(task)
+        elif task_type == "ocr_completed":
+            await self._process_ocr_completed_task(task)
+        elif task_type == "facts_extracted":
+            await self._process_facts_extracted_task(task)
         elif task_type == "evaluation":
             await self._process_evaluation_task(task)
         elif task_type == "verification":
             await self._process_verification_task(task)
         else:
             logger.warning(f"Unknown task type: {task_type}")
+
+    async def _process_document_uploaded_task(self, task: dict):
+        document_id = task.get("document_id")
+        logger.info(f"Triggering OCR pipeline for uploaded document: {document_id}")
+        await pipeline_service.process_document(document_id)
+
+    async def _process_ocr_completed_task(self, task: dict):
+        document_id = task.get("document_id")
+        logger.info(f"Triggering fact extraction for document: {document_id}")
+        await pipeline_service.process_document_facts(document_id)
+
+    async def _process_facts_extracted_task(self, task: dict):
+        tender_id = task.get("tender_id")
+        bidder_id = task.get("bidder_id")
+        logger.info(f"Triggering evaluation for tender: {tender_id}, bidder: {bidder_id}")
+        await pipeline_service.evaluate_bidder(tender_id, bidder_id)
     
     async def _process_ocr_task(self, task: dict):
         """Process OCR task."""

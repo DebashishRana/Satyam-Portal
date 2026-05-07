@@ -12,7 +12,8 @@ import logging
 from app.core.config import settings
 from app.core.database import init_db
 from app.api.v1.router import api_router
-from app.services.queue import init_queue
+from app.services.task_queue import init_queue
+from app.models import bidder_portal, tender  # noqa: F401 - register ORM models before create_all
 
 # Configure logging
 logging.basicConfig(
@@ -29,7 +30,10 @@ async def lifespan(app: FastAPI):
     # Startup
     logger.info("Starting up Satyam Portal...")
     await init_db()
-    await init_queue()
+    try:
+        await init_queue()
+    except Exception as e:
+        logger.warning(f"Task queue init failed (optional): {e}")
     logger.info("Satyam Portal started successfully!")
     yield
     # Shutdown

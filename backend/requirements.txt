@@ -4,7 +4,8 @@ fastapi==0.109.0
 uvicorn[standard]==0.27.0
 python-multipart==0.0.6
 python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
+passlib==1.7.4
+bcrypt==3.2.0
 
 # Database
 sqlalchemy[asyncio]==2.0.25
@@ -20,10 +21,14 @@ pydantic-settings==2.1.0
 email-validator==2.1.0
 
 # OCR & Document Processing
-# Note: In production, integrate with Bhashini, AWS Textract, or similar
+# IndicPhotoOCR for local Indian language support (Hindi, Tamil, Bengali, etc.)
+# Note: Version 1.3.1 had a missing cfglib module - this has been manually fixed
+# The cfglib folder was created at IndicPhotoOCR/detection/textbpn/cfglib/ with config.py
+IndicPhotoOCR==1.3.1
 pytesseract==0.3.10
 Pillow==10.2.0
-# layoutlmv3 would be added here from Hugging Face
+opencv-python==4.8.1.78
+# layoutlmv3 would be added here from Hugging Face for advanced layout understanding
 # transformers==4.36.2
 # torch==2.1.2
 

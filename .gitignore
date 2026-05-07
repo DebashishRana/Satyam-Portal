@@ -25,6 +25,7 @@ venv/
 ENV/
 env/
 .venv
+backend/venv_working/
 
 # IDEs
 .vscode/
@@ -79,3 +80,7 @@ Thumbs.db
 *.bak
 *.tmp
 *.temp
+
+# Downloaded OCR / language model artifacts
+backend/IndicLID/
+backend/IndicPhotoOCR/detection/textbpn/models/

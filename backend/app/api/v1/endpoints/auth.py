@@ -26,6 +26,22 @@ MOCK_USERS = {
         "organization": "CRPF",
         "full_name": "Rajesh Kumar"
     },
+    "officer@crpf.gov.in": {
+        "id": "1",
+        "email": "officer1@crpf.gov.in",
+        "hashed_password": get_password_hash("password123"),
+        "role": "committee_member",
+        "organization": "CRPF",
+        "full_name": "Rajesh Kumar"
+    },
+    "admin@crpf.gov.in": {
+        "id": "3",
+        "email": "admin@crpf.gov.in",
+        "hashed_password": get_password_hash("password123"),
+        "role": "admin",
+        "organization": "CRPF",
+        "full_name": "Satyam Admin"
+    },
     "bidder1@example.com": {
         "id": "2",
         "email": "bidder1@example.com",
@@ -38,9 +54,16 @@ MOCK_USERS = {
 
 @router.post("/login", response_model=Token)
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    """Login endpoint for both officers and bidders."""
-    user = MOCK_USERS.get(form_data.username)
-    if not user or not verify_password(form_data.password, user["hashed_password"]):
+    """Login endpoint for officers/admins and bidders."""
+    user = MOCK_USERS.get(form_data.username.lower())
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect email or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    if not verify_password(form_data.password, user["hashed_password"]):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",
@@ -93,7 +116,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     """Get current logged-in user details."""
     payload = verify_token(token)
     email = payload.get("sub")
-    user = MOCK_USERS.get(email)
+    user = MOCK_USERS.get(email.lower() if email else "")
     
     if not user:
         raise HTTPException(
